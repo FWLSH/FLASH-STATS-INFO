@@ -30,18 +30,13 @@ def search():
         if key != "Flash":
             return jsonify({"error": "Invalid or missing API key 🔑"}), 403
             
-        # 3. Check ki name parameter bheja gaya hai ya nahi
+        # Validate keyword parameter
         if not search_term:
             return json.dumps({"error": "name parameter is required"}, indent=2), 400, {'Content-Type': 'application/json; charset=utf-8'}
         
-        # 4. Name ki length check hogi
+        # Enforce minimum keyword length
         if len(search_term.strip()) < 3:
             return json.dumps({"error": "name must be at least 3 characters long"}, indent=2), 400, {'Content-Type': 'application/json; charset=utf-8'}
-
-        # --- Yahan aapka baki search logic aayega ---
-
-    except Exception as e:
-        return json.dumps({"error": str(e)}, indent=2), 500, {'Content-Type': 'application/json; charset=utf-8'}
         
         # Validate server exists in accounts
         if region not in accounts:
